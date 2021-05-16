@@ -1,4 +1,4 @@
-declare module "@thehanimo/react-native-audiokit" {
+declare module "@hieuxit/react-native-audiokit" {
   function trimAudio(
     fileName: string,
     startTime: number,

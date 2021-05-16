@@ -1,16 +1,8 @@
 {
-  "name": "@thehanimo/react-native-audiokit",
-  "version": "1.0.4",
+  "name": "@hieuxit/react-native-audiokit",
+  "version": "2.2.5",
   "description": "Exposes AudioKit for iOS to React Native.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thehanimo/react-native-audiokit.git",
-    "baseUrl": "https://github.com/thehanimo/react-native-audiokit"
-  },
   "keywords": [
     "react-native",
     "audiokit",
@@ -20,26 +12,11 @@
     "ios",
     "react-native-audiokit"
   ],
-  "author": {
-    "name": "Hani Mohammed",
-    "email": "thehanimo@gmail.com"
-  },
+  "repository": "https://github.com/hieuxit/react-native-audiokit",
+  "author": "Hani Mohammed <hani.m17@iiits.in> (https://thehanimo.com) modified by hieuxit",
   "license": "MIT",
-  "licenseFilename": "LICENSE",
-  "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/thehanimo/react-native-audiokit/issues"
+    "url": "https://github.com/hieuxit/react-native-audiokit/issues"
   },
-  "homepage": "https://github.com/thehanimo/react-native-audiokit#readme",
-  "peerDependencies": {
-    "react": "^16.8.1",
-    "react-native": ">=0.59.0-rc.0 <1.0.x"
-  },
-  "devDependencies": {
-    "react": "^16.9.0",
-    "react-native": "^0.59.9"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+  "homepage": "https://github.com/hieuxit/react-native-audiokit#readme"
 }
