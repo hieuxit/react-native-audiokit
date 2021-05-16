@@ -11,11 +11,11 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "10.0" }
-  s.source       = { :git => "https://github.com/thehanimo/react-native-audiokit.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/hieuxit/react-native-audiokit.git", :tag => "#{s.version}" }
 
-  
+
   s.source_files = "ios/**/*.{h,m,mm,swift}"
-  
+
 
   s.dependency "React-Core"
   s.dependency "AudioKit/Core"
