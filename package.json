@@ -1,6 +1,6 @@
 {
   "name": "@hieuxit/react-native-audiokit",
-  "version": "2.2.4",
+  "version": "2.2.6",
   "description": "Exposes AudioKit for iOS to React Native.",
   "main": "index.js",
   "keywords": [

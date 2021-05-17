@@ -14,11 +14,14 @@ import com.reactnativeaudiokit.wav.SoundFile;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class RNAudiokitModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext reactContext;
     private TrimmingTask asyncTask;
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     public RNAudiokitModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -60,7 +63,7 @@ public class RNAudiokitModule extends ReactContextBaseJavaModule {
 
         asyncTask = new TrimmingTask(reactContext);
         asyncTask.setCallback(promise);
-
+        asyncTask.setExecutor(executorService);
         asyncTask.execute(file, (float) start, (float) end);
     }
 
@@ -68,10 +71,13 @@ public class RNAudiokitModule extends ReactContextBaseJavaModule {
 
         private WeakReference<Promise> promiseRef;
         private WeakReference<Context> contextRef;
+        private WeakReference<ExecutorService> executorRef;
 
         public TrimmingTask(Context context) {
             this.contextRef = new WeakReference<>(context);
         }
+
+        private File input = null;
 
         @Override
         protected String doInBackground(Object... args) {
@@ -80,7 +86,7 @@ public class RNAudiokitModule extends ReactContextBaseJavaModule {
             if (context == null) return "";
 
             try {
-                File input = (File) args[0];
+                input = (File) args[0];
                 float start = (float) args[1];
                 float end = (float) args[2];
 
@@ -100,10 +106,28 @@ public class RNAudiokitModule extends ReactContextBaseJavaModule {
         protected void onPostExecute(String s) {
             Promise promise = promiseRef.get();
             if (promise != null) promise.resolve(s);
+
+            if (executorRef.get() != null && input != null && input.exists()) {
+                executorRef.get().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            input.delete();
+                        } catch (Exception ex) {
+                            Log.e("RNAudioKit", "Delete file", ex);
+                            ex.printStackTrace();
+                        }
+                    }
+                });
+            }
         }
 
         public void setCallback(Promise promise) {
             this.promiseRef = new WeakReference<>(promise);
+        }
+
+        public void setExecutor(ExecutorService executor) {
+            this.executorRef = new WeakReference<>(executor);
         }
     }
 
